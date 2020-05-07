@@ -3,10 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 import Tool from './components/Tokens'
 
-declare let web3: any
-declare let ethereum: any
-declare let Web3: any
-
 
 
 function App() {
