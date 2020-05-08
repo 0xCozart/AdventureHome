@@ -1,4 +1,4 @@
-import React, { Props } from 'react'
+import React from 'react'
 const { Table, Tr } = require('styled-table-component')
 
 

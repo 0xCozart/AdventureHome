@@ -1,7 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { TableHeader, TableBody} from './Table'
-import { render } from '@testing-library/react'
-import { stringify } from 'querystring'
 
 declare let web3: any
 declare let ethereum: any
@@ -42,7 +40,7 @@ let tokens = {
     ticker: 'GINANDJUICE',
     amount: '0',
     owned: false,
-    address: '0x7339D738bB5623565fa11213313b8f665663A459'
+    address: '0x4c10c76b6e04A8B2F6be2d9C39119C34907Be07F'
   },
   'JOLENE':{
     ticker: 'JOLENE',
@@ -54,7 +52,7 @@ let tokens = {
       ticker: 'SONNET18',
       amount: '0',
       owned: false,
-      address: '0x7339D738bB5623565fa11213313b8f665663A459'
+      address: '0xe1e05a4627fC5015d4374e05454Fd2159760fCf3'
   }
 }
 
@@ -146,6 +144,7 @@ async function erc20TokenGrab(erc20Address: string, userAddress: string) {
   // let output = total()
   // return output
   // }
+
 let minABI = [
   // balanceOf
   {
@@ -175,7 +174,7 @@ const determineBalance = (tokenAddress:string, userAddress:string) : Promise<str
         console.log('something went wrong' + error)
       };
       let output = success.toString()
-      output = output.substring(0, balance.length - 18)
+      output = output.substring(0, output.length - 18)
       // console.log(typeof(balance))
       resolve(output)
     })
@@ -185,25 +184,10 @@ const determineBalance = (tokenAddress:string, userAddress:string) : Promise<str
 export default function Tool() {
   const [userAccount, setUserAccount] = useState('')
   const [isConnected, setIsConnected] = useState(false)
-  // const [DOY, setDOY] = useState(tokens.DUNKONYOU)
-  // const [sonnet18, setSonnet18] = useState(tokens.SONNET18)
-  // const [ginandjuice, setGinandjuice] = useState(tokens.GINANDJUICE)
-  // const [jolene, setJolene] = useState(tokens.JOLENE)
-  // const [fishclub, setFishclub] = useState(tokens.FISHCLUB)
+  const [tokenBalances, setTokenBalances] = useState({})
   const tokensRef = useRef(tokens)
-  // tokensRef.current['DUNKONYOU'].amount = 'please work'
-  
-  // console.log(tokensRef.current['DUNKONYOU'])
-  
-  // const sets = [{DOY, setDOY}, {sonnet18, setSonnet18}, {ginandjuice, setGinandjuice}, {jolene, setJolene}, {fishclub, setFishclub}]
-  
-
-  // let contract = web3.eth.contract(minABI);
-  // let cont = contract.at(tokenAddress);
 
   let mike : string = '0x48E8479b4906D45fBE702A18ac2454F800238b37'
-  // let test = erc20TokenGrab(tokensRef.current['JOLENE'].address, mike);
-  // console.log(test))
 
   const connectMetamask = async() => {
     try {
@@ -229,6 +213,21 @@ export default function Tool() {
     }
   }
 
+  useEffect(() => {
+    Object.entries(tokensRef.current).forEach( async ([key, value]) => {
+      value.amount = await determineBalance(value.address, mike);
+      (parseInt(value.amount) > 0) ? (value.owned = true) : (value.owned=false); 
+      let tokenObj = {
+        ticker: value.ticker,
+        amount: value.amount,
+        owned: value.owned
+      }
+      setTokenBalances({...tokenBalances, tokenObj})
+      // console.log(tokenBalan ces)
+    })
+  }, [isConnected])
+  console.log(tokenBalances)
+
   const Trigger = () => {
     return (
       <div>
@@ -237,21 +236,28 @@ export default function Tool() {
     )
   }
 
+  // const Body = (ref : object ) => {
+  //   return (
+  //     <div>
+  //       {Object.entries(ref).forEach( async ([key, value]) => {
+  //         value.amount = await determineBalance(value.address, mike);
+  //         (parseInt(value.amount) > 0) ? (value.owned = true) : (value.owned=false); 
+  //         return(<TableBody ticker={value.ticker} amount={value.amount} owned={value.owned} />)
+  //         })
+  //       }
+  //     </div>
+  //   )
+  // }
+
   return (
       <div>
       <Trigger />
       <TableHeader address={userAccount} />
-        {Object.entries(tokensRef.current).forEach( async ([key, value]) => {
-            value.amount = await determineBalance(value.address, mike);
-            console.log('AMOUNT', value.amount);
-            (parseInt(value.amount) > 0) ? (value.owned = true) : (value.owned =false); 
-            // console.log(key, value); 
-            return (
-              <TableBody ticker={value.ticker} amount={value.amount} owned={value.owned} />
-            )
-            }
-          )
-        }
+      <TableBody ticker={tokensRef.current['DUNKONYOU'].ticker} amount={tokensRef.current['DUNKONYOU'].amount} owned={tokensRef.current['DUNKONYOU'].owned} />
+      <TableBody ticker={tokensRef.current['FISHCLUB'].ticker} amount={tokensRef.current['FISHCLUB'].amount} owned={tokensRef.current['FISHCLUB'].owned} />
+      <TableBody ticker={tokensRef.current['GINANDJUICE'].ticker} amount={tokensRef.current['GINANDJUICE'].amount} owned={tokensRef.current['GINANDJUICE'].owned} />
+      <TableBody ticker={tokensRef.current['JOLENE'].ticker} amount={tokensRef.current['JOLENE'].amount} owned={tokensRef.current['JOLENE'].owned} />
+      <TableBody ticker={tokensRef.current['SONNET18'].ticker} amount={tokensRef.current['SONNET18'].amount} owned={tokensRef.current['SONNET18'].owned} />
       </div>
-    )
+  )
 }
