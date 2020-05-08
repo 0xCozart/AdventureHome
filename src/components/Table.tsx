@@ -10,7 +10,7 @@ type headerProps = {
 
 type bodyProps = {
   ticker: string
-  amount: number
+  amount: string
   owned: boolean
 }
 
