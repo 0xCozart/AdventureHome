@@ -30,17 +30,9 @@ const StyledTableRow = withStyles((theme: Theme) =>
   }),
 )(TableRow);
 
-function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
-  return { name, calories, fat, carbs, protein };
+function createData(obj : refObj) {
+  return { obj };
 }
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 const useStyles = makeStyles({
   table: {
@@ -48,33 +40,60 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CustomizedTables() {
+interface refObj {
+  ticker: string
+  amount: string
+  owned: boolean
+  address: string
+  site: string
+  points: number
+}
+
+type tableProps = {
+  address: string
+  tknObj: refObj
+}
+
+type tokens = {
+  address: string
+  doy: refObj
+  fish: refObj
+  gin: refObj
+  jolene: refObj
+  sonnet: refObj
+}
+
+export default function CustomizedTables (props : tokens ) {
   const classes = useStyles();
+  const doy = createData(props.doy)
+  const fish = createData(props.fish)
+  const gin = createData(props.gin)
+  const jolene = createData(props.jolene)
+  const sonnet = createData(props.sonnet)
+  const tkns = [doy, fish, gin, jolene, sonnet];
 
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>{props.address}</StyledTableCell>
+            <StyledTableCell align="right">Bag</StyledTableCell>
+            <StyledTableCell align="right">Adventure Points</StyledTableCell>
+            <StyledTableCell align="right">Sites</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+        {Object.entries(tkns).forEach((key, item) => (
+            <StyledTableRow key={tkns[item].obj.ticker}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {tkns[item].obj.ticker}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell align="right">{tkns[item].obj.amount}</StyledTableCell>
+              <StyledTableCell align="right">{tkns[item].obj.points}</StyledTableCell>
+              <StyledTableCell align="right">{tkns[item].obj.site}</StyledTableCell>
             </StyledTableRow>
-          ))}
+        ))}
         </TableBody>
       </Table>
     </TableContainer>
