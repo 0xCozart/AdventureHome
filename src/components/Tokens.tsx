@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef, ReactInstance} from 'react'
 import { TableHeader, TableBody} from './Table'
+import PopupTable from './Popup'
 import '../App.css'
 // import CustomizedTables from './Custom'
 
@@ -121,7 +122,7 @@ export default function Tool() {
   const [tokenState, setTokenState] = useState<{[key:string] : data}>({})
   const tokensRef = useRef(tokens)
 
-  // let mike : string = '0x48E8479b4906D45fBE702A18ac2454F800238b37'
+  let mike : string = '0x48E8479b4906D45fBE702A18ac2454F800238b37'
 
   const connectMetamask = async() => {
     try {
@@ -150,7 +151,7 @@ export default function Tool() {
 
   useEffect(() => {
     Object.entries(tokensRef.current).forEach( async ([key, value]) => {
-      value.amount = await determineBalance(value.address, userAccount);
+      value.amount = await determineBalance(value.address, mike);
       value.points = (parseInt(value.amount) * 1000);
       (parseInt(value.amount) > 0) ? (value.owned = true) : (value.owned=false); 
       let tick : string = value.ticker
@@ -179,13 +180,21 @@ export default function Tool() {
 
   return (
     <div className={"table"}>
-      <Trigger />
+      {/* <Trigger />
       <TableHeader address={userAccount} />
       <TableBody ticker={tokensRef.current['DUNKONYOU'].ticker} amount={tokensRef.current['DUNKONYOU'].amount} owned={tokensRef.current['DUNKONYOU'].owned} />
       <TableBody ticker={tokensRef.current['FISHCLUB'].ticker} amount={tokensRef.current['FISHCLUB'].amount} owned={tokensRef.current['FISHCLUB'].owned} />
       <TableBody ticker={tokensRef.current['GINANDJUICE'].ticker} amount={tokensRef.current['GINANDJUICE'].amount} owned={tokensRef.current['GINANDJUICE'].owned} />
       <TableBody ticker={tokensRef.current['JOLENE'].ticker} amount={tokensRef.current['JOLENE'].amount} owned={tokensRef.current['JOLENE'].owned} />
-      <TableBody ticker={tokensRef.current['SONNET18'].ticker} amount={tokensRef.current['SONNET18'].amount} owned={tokensRef.current['SONNET18'].owned} />
+      <TableBody ticker={tokensRef.current['SONNET18'].ticker} amount={tokensRef.current['SONNET18'].amount} owned={tokensRef.current['SONNET18'].owned} /> */}
+      <PopupTable
+        address={mike} 
+        doy={tokensRef.current['DUNKONYOU']}
+        fish={tokensRef.current['FISHCLUB']}
+        gin={tokensRef.current['GINANDJUICE']}
+        jolene={tokensRef.current['JOLENE']}
+        sonnet={tokensRef.current['SONNET18']}
+      />
     </div>
   )
 }

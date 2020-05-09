@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Tool from './components/Tokens'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
