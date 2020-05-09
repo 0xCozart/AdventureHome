@@ -74,33 +74,6 @@ interface final {
 };
 
 
-async function erc20TokenGrab(erc20Address: string, userAddress: string) {
-  let tokenAddress = erc20Address
-  let walletAddress = userAddress
-  // The minimum ABI to get ERC20 Token balance
-  let minABI = [
-    // balanceOf
-    {
-      "constant":true,
-      "inputs":[{"name":"_owner","type":"address"}],
-      "name":"balanceOf",
-      "outputs":[{"name":"balance","type":"uint256"}],
-      "type":"function"
-    },
-    // decimals
-    {
-      "constant":true,
-      "inputs":[],
-      "name":"decimals",
-      "outputs":[{"name":"","type":"uint8"}],
-      "type":"function"
-    }
-  ];
-  // Get ERC20 Token contract instance
-  let contract = web3.eth.contract(minABI);
-  let cont = contract.at(tokenAddress);
-
-
 let minABI = [
   // balanceOf
   {
@@ -148,7 +121,7 @@ export default function Tool() {
   const [tokenState, setTokenState] = useState<{[key:string] : data}>({})
   const tokensRef = useRef(tokens)
 
-  let mike : string = '0x48E8479b4906D45fBE702A18ac2454F800238b37'
+  // let mike : string = '0x48E8479b4906D45fBE702A18ac2454F800238b37'
 
   const connectMetamask = async() => {
     try {
@@ -177,7 +150,7 @@ export default function Tool() {
 
   useEffect(() => {
     Object.entries(tokensRef.current).forEach( async ([key, value]) => {
-      value.amount = await determineBalance(value.address, mike);
+      value.amount = await determineBalance(value.address, userAccount);
       value.points = (parseInt(value.amount) * 1000);
       (parseInt(value.amount) > 0) ? (value.owned = true) : (value.owned=false); 
       let tick : string = value.ticker
@@ -204,36 +177,15 @@ export default function Tool() {
     )
   }
 
-  // const Body = (ref : object ) => {
-  //   return (
-  //     <div>
-  //       {Object.entries(ref).forEach( async ([key, value]) => {
-  //         value.amount = await determineBalance(value.address, mike);
-  //         (parseInt(value.amount) > 0) ? (value.owned = true) : (value.owned=false); 
-  //         return(<TableBody ticker={value.ticker} amount={value.amount} owned={value.owned} />)
-  //         })
-  //       }
-  //     </div>
-  //   )
-  // }
-
   return (
     <div className={"table"}>
       <Trigger />
-      <TableHeader address={mike} />
+      <TableHeader address={userAccount} />
       <TableBody ticker={tokensRef.current['DUNKONYOU'].ticker} amount={tokensRef.current['DUNKONYOU'].amount} owned={tokensRef.current['DUNKONYOU'].owned} />
       <TableBody ticker={tokensRef.current['FISHCLUB'].ticker} amount={tokensRef.current['FISHCLUB'].amount} owned={tokensRef.current['FISHCLUB'].owned} />
       <TableBody ticker={tokensRef.current['GINANDJUICE'].ticker} amount={tokensRef.current['GINANDJUICE'].amount} owned={tokensRef.current['GINANDJUICE'].owned} />
       <TableBody ticker={tokensRef.current['JOLENE'].ticker} amount={tokensRef.current['JOLENE'].amount} owned={tokensRef.current['JOLENE'].owned} />
       <TableBody ticker={tokensRef.current['SONNET18'].ticker} amount={tokensRef.current['SONNET18'].amount} owned={tokensRef.current['SONNET18'].owned} />
-      {/* <CustomizedTables 
-        address={mike}
-        doy={tokenState['DUNKONYOU']}
-        fish={tokenState['FISHCLUB']}
-        gin={gin}
-        jolene={jolene}
-        sonnet={sonnet}
-      /> */}
     </div>
   )
 }
