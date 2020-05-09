@@ -47,7 +47,7 @@ function TableBody(props : bodyProps) {
   return(
     <Table tableDark={true}>
       <tbody>
-        <Tr tableDark={true} key={props.ticker}><td>{props.ticker}</td><td>{props.amount} {owned}</td></Tr>
+        <Tr align="right" dark hover key={props.ticker}><td>{props.ticker}</td><td>{props.amount} {owned}</td></Tr>
       </tbody>
     </Table>
   )

@@ -1,13 +1,11 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef, ReactInstance} from 'react'
 import { TableHeader, TableBody} from './Table'
-import CustomizedTables from './Custom'
-import { stringify } from 'querystring'
+import '../App.css'
+// import CustomizedTables from './Custom'
 
 declare let web3: any
 declare let ethereum: any
 declare let Web3: any
-
-
 
 let tokens = {
   'DUNKONYOU':{
@@ -51,7 +49,7 @@ let tokens = {
       points: 0
   }
 }
-export interface tkn {
+export interface data {
   ticker: string
   amount: string
   owned: boolean
@@ -60,16 +58,21 @@ export interface tkn {
   points: number
 }
 
-type tknTicker = {
-  ticker:string
+enum tkns {
+  dunkonyou = "DUNKONYOU",
+  fishclub = "FISHCLUB",
+  jolene = "JOLENE",
+  sonnet = "SONNET18",
+  ginandjuice = "GINANDJUICE"
 }
-type final = {[tknTicker : string ] : tkn}
-type fin = {
-  holder : final 
+
+type tick = {
+  name : string
 }
-// interface tknState {
-//   tick : tknTicker.ticker : tkn
-// }
+interface final {
+    [ticker : string] : data
+};
+
 
 async function erc20TokenGrab(erc20Address: string, userAddress: string) {
   let tokenAddress = erc20Address
@@ -97,68 +100,6 @@ async function erc20TokenGrab(erc20Address: string, userAddress: string) {
   let contract = web3.eth.contract(minABI);
   let cont = contract.at(tokenAddress);
 
-  // const determineBalance = () => {
-  //   return new Promise(resolve => {
-  //       let balance : string = cont.balanceOf(walletAddress, (error:any, success:object) => {
-  //         if (error) {
-  //           console.log('something went wrong' + error)
-  //         };
-  //         let balance = success.toString()
-  //         balance = balance.substring(0, balance.length - 18)
-  //         // console.log(typeof(balance))
-  //         return balance 
-  //       })
-  //       console.log(typeof(balance))
-  //       return balance
-  //     })
-  //   }
-  // const determineBalance = (address:string) => {
-  //   Promise<string> => {resolve => {
-  //     let balance : string = cont.balanceOf(address, (error:any, success:object) => {
-  //       if (error) {
-  //         console.log('something went wrong' + error)
-  //       };
-  //       let balance = success.toString()
-  //       balance = balance.substring(0, balance.length - 18)
-  //       // console.log(typeof(balance))
-  //       resolve(balance)
-  //     })
-  //   })
-  // }  
-  // const bal = await determineBalance(userAddress)
-  // // console.log(bal)
-  // return bal
-}
-  // return b
-  // Call balanceOf function
-  // let total = contract.balanceOf(walletAddress, (error:string, balance:any) => {
-  //     // Get decimals
-  //     // let read = balance.toString()
-  //     // let ret = read.substring(0, read.length - 18)
-  //     // return(balance)
-  //     contract.decimals((error:any, decimals:number) => {
-  //       // calculate a balance
-  //       balance = balance.div(10**decimals);
-  //       let read : string = balance.toString()
-  //       read = read.substring(0, decimals - 18)
-  //       console.log(read)
-  //       return(read)
-  //     });
-  //   }
-  // )
-  // let balance : string = contract.balanceOf(walletAddress, (error:string, balance:any) => {
-  //   return balance
-  //   });
-
-  // let decimals : number = contract.decimals((error : string, decimals:number) => {
-  //   return decimals
-  // })
-  // let output = balance.div(10**decimals)
-  // // balance.toString()
-  // console.log(output)
-  // let output = total()
-  // return output
-  // }
 
 let minABI = [
   // balanceOf
@@ -204,7 +145,7 @@ export default function Tool() {
   const [fish, setFish] = useState({})
   const [jolene, setJolene] = useState({})
   const [sonnet, setSonnet] = useState({})
-  const [tokenState, setTokenState] = useState<{[tick:string] : final}>({})
+  const [tokenState, setTokenState] = useState<{[key:string] : data}>({})
   const tokensRef = useRef(tokens)
 
   let mike : string = '0x48E8479b4906D45fBE702A18ac2454F800238b37'
@@ -233,36 +174,15 @@ export default function Tool() {
     }
   }
 
-  // useEffect(() => {
-  //   let updateDoy = tokensRef.current['DUNKONYOU']
-  //   let updateFish = tokensRef.current['FISHCLUB']
-  //   let updateGin = tokensRef.current['GINANDJUICE']
-  //   let updateJolene = tokensRef.current['JOLENE']
-  //   let updateSonnet = tokensRef.current['SONNET18']
-  //   setDoy({...doy, updateDoy});
-  //   setFish({...fish, updateFish});
-  //   setGin({...gin, updateGin});
-  //   setJolene({...jolene, updateJolene});
-  //   setSonnet({...sonnet, updateSonnet});
-  //   console.log(doy)
-  // })
 
   useEffect(() => {
     Object.entries(tokensRef.current).forEach( async ([key, value]) => {
       value.amount = await determineBalance(value.address, mike);
       value.points = (parseInt(value.amount) * 1000);
       (parseInt(value.amount) > 0) ? (value.owned = true) : (value.owned=false); 
-      let tick = value.ticker.toString();
-      // let tokenObj = {
-      //   [tick] : {
-      //     ticker: value.ticker,
-      //     amount: value.amount,
-      //     owned: value.owned
-      //   }
-      // }
-      
-      const update : final = {...tokenState, 
-        [tick] :   {
+      let tick : string = value.ticker
+      let update = {
+        [tick] : {
           ticker: value.ticker,
           amount: value.amount,
           owned: value.owned,
@@ -270,23 +190,11 @@ export default function Tool() {
           site: value.site,
           points: value.points,
         }
-      }
-      setTokenState(update)
-      // console.log()
-    });
-    // let updateDoy = tokensRef.current['DUNKONYOU']
-    // let updateFish = tokensRef.current['FISHCLUB']
-    // let updateGin = tokensRef.current['GINANDJUICE']
-    // let updateJolene = tokensRef.current['JOLENE']
-    // let updateSonnet = tokensRef.current['SONNET18']
-    // setDoy(updateDoy);
-    // setFish(updateFish);
-    // setGin(updateGin);
-    // setJolene(updateJolene);
-    // setSonnet(updateSonnet);
-    // console.log(doy)
-  },)
-  console.log(tokenState)
+      };
+      // setTokenState({...tokenState, update});
+      console.log(tokenState)
+    })
+  }, [isConnected])
 
   const Trigger = () => {
     return (
@@ -310,22 +218,22 @@ export default function Tool() {
   // }
 
   return (
-      <div>
-      {/* <Trigger />
-      <TableHeader address={userAccount} />
+    <div className={"table"}>
+      <Trigger />
+      <TableHeader address={mike} />
       <TableBody ticker={tokensRef.current['DUNKONYOU'].ticker} amount={tokensRef.current['DUNKONYOU'].amount} owned={tokensRef.current['DUNKONYOU'].owned} />
       <TableBody ticker={tokensRef.current['FISHCLUB'].ticker} amount={tokensRef.current['FISHCLUB'].amount} owned={tokensRef.current['FISHCLUB'].owned} />
       <TableBody ticker={tokensRef.current['GINANDJUICE'].ticker} amount={tokensRef.current['GINANDJUICE'].amount} owned={tokensRef.current['GINANDJUICE'].owned} />
       <TableBody ticker={tokensRef.current['JOLENE'].ticker} amount={tokensRef.current['JOLENE'].amount} owned={tokensRef.current['JOLENE'].owned} />
-      <TableBody ticker={tokensRef.current['SONNET18'].ticker} amount={tokensRef.current['SONNET18'].amount} owned={tokensRef.current['SONNET18'].owned} /> */}
-      <CustomizedTables 
+      <TableBody ticker={tokensRef.current['SONNET18'].ticker} amount={tokensRef.current['SONNET18'].amount} owned={tokensRef.current['SONNET18'].owned} />
+      {/* <CustomizedTables 
         address={mike}
         doy={tokenState['DUNKONYOU']}
-        fish={fish}
+        fish={tokenState['FISHCLUB']}
         gin={gin}
         jolene={jolene}
         sonnet={sonnet}
-      />
-      </div>
+      /> */}
+    </div>
   )
 }

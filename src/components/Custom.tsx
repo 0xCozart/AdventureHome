@@ -30,15 +30,15 @@ const StyledTableRow = withStyles((theme: Theme) =>
   }),
 )(TableRow);
 
-function createData(obj : refObj) {
-  return { obj };
-}
-
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
   },
 });
+
+function createData(obj : refObj) {
+  return { obj };
+}
 
 interface refObj {
   ticker: string
@@ -83,7 +83,7 @@ export default function CustomizedTables (props : tokens ) {
             <StyledTableCell align="right">Sites</StyledTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        {/* <TableBody>
         {Object.entries(tkns).forEach((key, item) => (
             <StyledTableRow key={tkns[item].obj.ticker}>
               <StyledTableCell component="th" scope="row">
@@ -93,8 +93,8 @@ export default function CustomizedTables (props : tokens ) {
               <StyledTableCell align="right">{tkns[item].obj.points}</StyledTableCell>
               <StyledTableCell align="right">{tkns[item].obj.site}</StyledTableCell>
             </StyledTableRow>
-        ))}
-        </TableBody>
+        ))} */}
+        {/* </TableBody> */}
       </Table>
     </TableContainer>
   );
