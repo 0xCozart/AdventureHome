@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef, ReactInstance} from 'react'
 import { TableHeader, TableBody} from './Table'
-import PopupTable from './Popup'
+import { PopupTable, TknTable } from './Popup'
 import '../App.css'
 // import CustomizedTables from './Custom'
 
@@ -152,6 +152,9 @@ export default function Tool() {
   useEffect(() => {
     Object.entries(tokensRef.current).forEach( async ([key, value]) => {
       value.amount = await determineBalance(value.address, mike);
+      if(!value.amount){ 
+        value.amount = '0'
+      }
       value.points = (parseInt(value.amount) * 1000);
       (parseInt(value.amount) > 0) ? (value.owned = true) : (value.owned=false); 
       let tick : string = value.ticker
