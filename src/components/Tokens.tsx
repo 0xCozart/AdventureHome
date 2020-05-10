@@ -123,7 +123,7 @@ export default function Tool() {
   const [tokenState, setTokenState] = useState<{[key:string] : data}>({})
   const tokensRef = useRef(tokens)
 
-  let mike : string = '0x48E8479b4906D45fBE702A18ac2454F800238b37'
+  // let mike : string = '0x48E8479b4906D45fBE702A18ac2454F800238b37'
 
   const connectMetamask = async() => {
     try {
@@ -152,23 +152,23 @@ export default function Tool() {
 
   useEffect(() => {
     Object.entries(tokensRef.current).forEach( async ([key, value]) => {
-      value.amount = await determineBalance(value.address, mike);
+      value.amount = await determineBalance(value.address, userAccount);
       if(!value.amount){ 
         value.amount = '0'
       }
       value.points = (parseInt(value.amount) * 1000);
       (parseInt(value.amount) > 0) ? (value.owned = true) : (value.owned=false); 
-      let tick : string = value.ticker
-      let update = {
-        [tick] : {
-          ticker: value.ticker,
-          amount: value.amount,
-          owned: value.owned,
-          address: value.address,
-          site: value.site,
-          points: value.points,
-        }
-      };
+      // let tick : string = value.ticker
+      // let update = {
+      //   [tick] : {
+      //     ticker: value.ticker,
+      //     amount: value.amount,
+      //     owned: value.owned,
+      //     address: value.address,
+      //     site: value.site,
+      //     points: value.points,
+      //   }
+      // };
       // setTokenState({...tokenState, update});
       console.log(tokenState)
     })
@@ -194,7 +194,7 @@ export default function Tool() {
       /> */}
       <div><img className={"adventure-logo"} src="/adventure-logo.png" alt="adventure logo" /></div>
       <TknTable
-        address={mike} 
+        address={userAccount} 
         doy={tokensRef.current['DUNKONYOU']}
         fish={tokensRef.current['FISHCLUB']}
         gin={tokensRef.current['GINANDJUICE']}
