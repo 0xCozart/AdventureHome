@@ -11,7 +11,7 @@ const bounce = require('react-animations')
 
 const bounceAnimation = keyframes`${bounce}`;
 
-const BounceCell = styled.td`animation: ${bounceAnimation} infininte 5s;`;
+const BounceCell = styled.div`animation: ${bounceAnimation} infininte 5s;`;
 
 
 
@@ -44,12 +44,12 @@ const PopupTable = (props : tokens) => {
     // @ts-ignore */}
       <Toast show={show} onClose={() => toggleShow(false)}>
         <Toast.Header>
-          {/* <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" /> */}
+          <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
           {/* <strong className="mr-auto">{props.address}</strong> */}
           <small>{props.address}</small>
         </Toast.Header>
-        <Toast.Body>
-        <Table striped bordered hover>
+        <Toast.Body >
+        <Table striped bordered hover variant={'dark'}>
           <thead>
             <tr>
               <th colSpan={2}>Adventure Tokens</th>
@@ -58,9 +58,9 @@ const PopupTable = (props : tokens) => {
           </thead>
           <tbody>
             <tr>
-              {/* <td> */}
+              <td>
                 <BounceCell><img src='/ball.png' className={"token-images"} alt={'Basketball'}/></BounceCell>
-              {/* </td>   */}
+              </td>  
               <td><a href={props.doy.site}>{props.doy.ticker}</a></td>
               <td>{props.doy.amount}</td>
             </tr>
@@ -102,8 +102,12 @@ const PopupTable = (props : tokens) => {
 
 const TknTable = (props : tokens) => {
   return (
-    <Table striped bordered hover>
+    <div className="table-div">
+    <Table hover variant={'dark'}>
       <thead>
+        <tr>
+          <th colSpan={3}>{props.address}</th>
+        </tr>
         <tr>
           <th colSpan={2}>Adventure Tokens</th>
           <th>Bag</th>
@@ -112,41 +116,42 @@ const TknTable = (props : tokens) => {
       <tbody>
         <tr>
           <td>
-            <BounceCell><img src='/ball.png' className={"token-images"} alt={'Basketball'} /></BounceCell>
+            <img src='/ball.png' className={"token-table-images"} alt={'Basketball'} />
           </td>  
           <td><a href={props.doy.site}>{props.doy.ticker}</a></td>
           <td>{props.doy.amount}</td>
         </tr>
         <tr>
           <td>  
-            <BounceCell><img src='/fish.png' className={"token-images"} alt={'fishclub'}/></BounceCell>
+            <img src='/fish.png' className={"token-table-images"} alt={'fishclub'}/>
           </td>
           <td><a href={props.fish.site}>{props.fish.ticker}</a></td>
           <td>{props.fish.amount}</td>
         </tr>
         <tr>
           <td>
-            <BounceCell><img src='/snoop.png' className={"token-images"} alt={'Snoop'}/></BounceCell>
+            <img src='/snoop.png' className={"token-table-images"} alt={'Snoop'}/>
           </td>
           <td><a href={props.gin.site}>{props.gin.ticker}</a></td>
           <td>{props.gin.amount}</td>
         </tr>
         <tr>
           <td>
-            <BounceCell><img src='/jolene.png' className={"token-images"} alt={'Ball'}/></BounceCell>
+            <img src='/jolene.png' className={"token-table-images"} alt={'Ball'}/>
           </td>
           <td><a href={props.jolene.site}>{props.jolene.ticker}</a></td>
           <td>{props.jolene.amount}</td>
         </tr>
         <tr>
           <td>
-            <BounceCell><img src='/shakes.png' className={"token-images"} alt={'To be or not to be'}/></BounceCell>
+            <img src='/shakes.png' className={"token-table-images"} alt={'To be or not to be'}/>
           </td>
           <td><a href={props.sonnet.site}>{props.sonnet.ticker}</a></td>
           <td>{props.sonnet.amount}</td>
         </tr>
       </tbody>
     </Table>
+    </div>
   )
 }
 

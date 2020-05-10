@@ -1,7 +1,9 @@
 import React, {useState, useEffect, useRef, ReactInstance} from 'react'
 import { TableHeader, TableBody} from './Table'
 import { PopupTable, TknTable } from './Popup'
+import Button from 'react-bootstrap/Button'
 import '../App.css'
+import adventure from '/adventure-logo.png'
 // import CustomizedTables from './Custom'
 
 declare let web3: any
@@ -73,7 +75,6 @@ type tick = {
 interface final {
     [ticker : string] : data
 };
-
 
 let minABI = [
   // balanceOf
@@ -176,21 +177,23 @@ export default function Tool() {
   const Trigger = () => {
     return (
       <div>
-        <button className="button" onClick={connectMetamask}>Connect Metamask</button>
+        <Button variant="dark" onClick={connectMetamask}>Connect Metamask</Button>{' '}
       </div>
     )
   }
 
   return (
-    <div className={"table"}>
-      {/* <Trigger />
-      <TableHeader address={userAccount} />
-      <TableBody ticker={tokensRef.current['DUNKONYOU'].ticker} amount={tokensRef.current['DUNKONYOU'].amount} owned={tokensRef.current['DUNKONYOU'].owned} />
-      <TableBody ticker={tokensRef.current['FISHCLUB'].ticker} amount={tokensRef.current['FISHCLUB'].amount} owned={tokensRef.current['FISHCLUB'].owned} />
-      <TableBody ticker={tokensRef.current['GINANDJUICE'].ticker} amount={tokensRef.current['GINANDJUICE'].amount} owned={tokensRef.current['GINANDJUICE'].owned} />
-      <TableBody ticker={tokensRef.current['JOLENE'].ticker} amount={tokensRef.current['JOLENE'].amount} owned={tokensRef.current['JOLENE'].owned} />
-      <TableBody ticker={tokensRef.current['SONNET18'].ticker} amount={tokensRef.current['SONNET18'].amount} owned={tokensRef.current['SONNET18'].owned} /> */}
-      <PopupTable
+    <div className="centered">
+      {/* <PopupTable
+        address={mike} 
+        doy={tokensRef.current['DUNKONYOU']}
+        fish={tokensRef.current['FISHCLUB']}
+        gin={tokensRef.current['GINANDJUICE']}
+        jolene={tokensRef.current['JOLENE']}
+        sonnet={tokensRef.current['SONNET18']}
+      /> */}
+      <div><img className={"adventure-logo"} src="/adventure-logo.png" alt="adventure logo" /></div>
+      <TknTable
         address={mike} 
         doy={tokensRef.current['DUNKONYOU']}
         fish={tokensRef.current['FISHCLUB']}
@@ -198,6 +201,7 @@ export default function Tool() {
         jolene={tokensRef.current['JOLENE']}
         sonnet={tokensRef.current['SONNET18']}
       />
+      <Trigger></Trigger>
     </div>
   )
 }

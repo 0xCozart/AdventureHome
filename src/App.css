@@ -1,5 +1,12 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
 .App {
   text-align: center;
+  height: 100%;
+  width: 100%;
 }
 
 .App-logo {
@@ -38,17 +45,45 @@
 }
 
 .button {
-  top: 20px;
-  left: 20px;
   width: 100px;
+  display: inline-block;
+  position: relative;
 }
 
-.table {
-  width: 500px;
-  height: 400px;
+.table-container {
+  top: 50px;
+  left: 50%;
+  /* width: 500px;
+  height: 400px;  */
 }
 
 .token-images {
+  width: 10%;
+  height: 10%;
+}
+
+.token-table-images {
+  width: 20%;
+  height: 20%;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+.table-div {
   width: 50%;
-  height: 50%;
+  display: inline-block;
+  /* align-items: center; */
+  /* text-align: center; */
+}
+
+.adventure-logo {
+  width: 350px;
+  height: 100px;
+  display: inline-block;
 }
