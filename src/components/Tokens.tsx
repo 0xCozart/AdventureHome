@@ -49,7 +49,7 @@ let tokens = {
       points: 0
   }
 }
-export interface data {
+interface data {
   ticker: string
   amount: string
   owned: boolean
@@ -130,7 +130,6 @@ export default function Table() {
     }
   }
 
-
   useEffect(() => {
     Object.entries(tokensRef.current).forEach( async ([key, value]) => {
       value.amount = await determineBalance(value.address, userAccount);
@@ -160,6 +159,7 @@ export default function Table() {
       </div>
     )
   }
+  console.log(tokenState)
 
   return (
     <div className="centered">
@@ -174,6 +174,11 @@ export default function Table() {
       <div><img className={"adventure-logo"} src="/adventure-logo.png" alt="adventure logo" /></div>
       <TknTable
         address={userAccount} 
+        // doy={tokenState['DUNKONYOU']}
+        // fish={tokenState['FISHCLUB']}
+        // gin={tokenState['GINANDJUICE']}
+        // jolene={tokenState['JOLENE']}
+        // sonnet={tokenState['SONNET18']}
         doy={tokensRef.current['DUNKONYOU']}
         fish={tokensRef.current['FISHCLUB']}
         gin={tokensRef.current['GINANDJUICE']}

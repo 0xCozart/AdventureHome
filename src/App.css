@@ -48,6 +48,7 @@ html, body {
   width: 100px;
   display: inline-block;
   position: relative;
+  opacity: 0.80;
 }
 
 .table-container {
@@ -74,10 +75,12 @@ html, body {
 
 .table-div {
   display: inline-block;
+  opacity: 0.80;
 }
 
 .adventure-logo {
   width: 350px;
   height: 100px;
   display: inline-block;
+  opacity: 0.70;
 }
