@@ -103,7 +103,7 @@ const PopupTable = (props : tokens) => {
 const TknTable = (props : tokens) => {
   return (
     <div className="table-div">
-    <Table hover variant={'dark'}>
+    <Table bordered hover variant={'dark'}>
       <thead>
         <tr>
           <th colSpan={3}>{props.address}</th>

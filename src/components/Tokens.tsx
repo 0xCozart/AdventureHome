@@ -1,10 +1,7 @@
 import React, {useState, useEffect, useRef, ReactInstance} from 'react'
-import { TableHeader, TableBody} from './Table'
 import { PopupTable, TknTable } from './Popup'
 import Button from 'react-bootstrap/Button'
 import '../App.css'
-import adventure from '/adventure-logo.png'
-// import CustomizedTables from './Custom'
 
 declare let web3: any
 declare let ethereum: any
@@ -61,20 +58,9 @@ export interface data {
   points: number
 }
 
-enum tkns {
-  dunkonyou = "DUNKONYOU",
-  fishclub = "FISHCLUB",
-  jolene = "JOLENE",
-  sonnet = "SONNET18",
-  ginandjuice = "GINANDJUICE"
-}
-
 type tick = {
   name : string
 }
-interface final {
-    [ticker : string] : data
-};
 
 let minABI = [
   // balanceOf
@@ -112,14 +98,9 @@ const determineBalance = (tokenAddress:string, userAddress:string) : Promise<str
   })
 }  
 
-export default function Tool() {
+export default function Table() {
   const [userAccount, setUserAccount] = useState('')
   const [isConnected, setIsConnected] = useState(false)
-  const [doy, setDoy] = useState({})
-  const [gin, setGin] = useState({})
-  const [fish, setFish] = useState({})
-  const [jolene, setJolene] = useState({})
-  const [sonnet, setSonnet] = useState({})
   const [tokenState, setTokenState] = useState<{[key:string] : data}>({})
   const tokensRef = useRef(tokens)
 
@@ -155,21 +136,19 @@ export default function Tool() {
       value.amount = await determineBalance(value.address, userAccount);
       if(!value.amount){ 
         value.amount = '0'
-      }
+      };
       value.points = (parseInt(value.amount) * 1000);
       (parseInt(value.amount) > 0) ? (value.owned = true) : (value.owned=false); 
-      // let tick : string = value.ticker
-      // let update = {
-      //   [tick] : {
-      //     ticker: value.ticker,
-      //     amount: value.amount,
-      //     owned: value.owned,
-      //     address: value.address,
-      //     site: value.site,
-      //     points: value.points,
-      //   }
-      // };
-      // setTokenState({...tokenState, update});
+      let tick : string = value.ticker
+      setTokenState({...tokenState, [tick] : {
+        ticker: value.ticker,
+        amount: value.amount,
+        owned: value.owned,
+        address: value.address,
+        site: value.site,
+        points: value.points,
+        }
+      });
       console.log(tokenState)
     })
   }, [isConnected])
