@@ -16,16 +16,13 @@
     "@types/styled-components": "^5.1.0",
     "bootstrap": "^4.4.1",
     "react": "^16.13.1",
-    "react-animations": "^1.0.0",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "react-table": "^7.0.4",
     "styled-components": "^4.4.1",
     "styled-table-component": "^4.0.0",
     "typeface-roboto": "0.0.75",
-    "typescript": "^3.7.5",
-    "web3": "^1.2.7"
+    "typescript": "^3.7.5"
   },
   "scripts": {
     "start": "react-scripts start",
