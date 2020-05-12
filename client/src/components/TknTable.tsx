@@ -37,7 +37,7 @@ const TknTable = (props: tokens) => {
           <tr>
             <td>
               <img
-                src="/ball.png"
+                src="/images/ball.png"
                 className={"token-table-images"}
                 alt={"Basketball"}
               />
@@ -52,7 +52,7 @@ const TknTable = (props: tokens) => {
           <tr>
             <td>
               <img
-                src="/fish.png"
+                src="/images/fish.png"
                 className={"token-table-images"}
                 alt={"fishclub"}
               />
@@ -67,7 +67,7 @@ const TknTable = (props: tokens) => {
           <tr>
             <td>
               <img
-                src="/snoop.png"
+                src="/images/snoop.png"
                 className={"token-table-images"}
                 alt={"Snoop"}
               />
@@ -82,7 +82,7 @@ const TknTable = (props: tokens) => {
           <tr>
             <td>
               <img
-                src="/jolene.png"
+                src="/images/jolene.png"
                 className={"token-table-images"}
                 alt={"Ball"}
               />
@@ -97,7 +97,7 @@ const TknTable = (props: tokens) => {
           <tr>
             <td>
               <img
-                src="/shakes.png"
+                src="/images/shakes.png"
                 className={"token-table-images"}
                 alt={"To be or not to be"}
               />

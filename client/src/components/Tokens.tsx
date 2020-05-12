@@ -106,7 +106,7 @@ export default function Table() {
       <div>
         <img
           className={"adventure-logo"}
-          src="/adventure-logo.png"
+          src="/images/adventure-logo.png"
           alt="adventure logo"
         />
       </div>
