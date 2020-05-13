@@ -1,32 +1,21 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
+import { tokenName, tokenDataObj } from "../types/tokenStyles";
 import "../App.css";
 
-interface refObj {
-  ticker: string;
-  amount: string;
-  owned: boolean;
-  address: string;
-  site: string;
-  points: number;
-}
-
-type tokens = {
-  address: string;
-  doy: refObj;
-  fish: refObj;
-  gin: refObj;
-  jolene: refObj;
-  sonnet: refObj;
+type tableData = {
+  userAddress: string;
+  tokenData: tokenDataObj;
+  balance: { [key: number]: { value: string } };
 };
 
-const TknTable = (props: tokens) => {
+const TknTable = (props: tableData) => {
   return (
     <div className="table-div">
       <Table bordered hover variant={"dark"}>
         <thead>
           <tr>
-            <th colSpan={3}>{props.address}</th>
+            <th colSpan={3}>{props.userAddress}</th>
           </tr>
           <tr>
             <th colSpan={2}>Adventure Tokens</th>
@@ -43,11 +32,14 @@ const TknTable = (props: tokens) => {
               />
             </td>
             <td>
-              <a href={props.doy.site} target="_blanck">
-                {props.doy.ticker}
+              <a
+                href={props.tokenData[tokenName.dunkonyou].link}
+                target="_blanck"
+              >
+                {props.tokenData[tokenName.dunkonyou].ticker}
               </a>
             </td>
-            <td>{props.doy.amount}</td>
+            <td>{props.balance[tokenName.dunkonyou].value}</td>
           </tr>
           <tr>
             <td>
@@ -58,11 +50,14 @@ const TknTable = (props: tokens) => {
               />
             </td>
             <td>
-              <a href={props.fish.site} target="_blanck">
-                {props.fish.ticker}
+              <a
+                href={props.tokenData[tokenName.fishclub].link}
+                target="_blanck"
+              >
+                {props.tokenData[tokenName.fishclub].ticker}
               </a>
             </td>
-            <td>{props.fish.amount}</td>
+            <td>{props.balance[tokenName.fishclub].value}</td>
           </tr>
           <tr>
             <td>
@@ -73,11 +68,14 @@ const TknTable = (props: tokens) => {
               />
             </td>
             <td>
-              <a href={props.gin.site} target="_blanck">
-                {props.gin.ticker}
+              <a
+                href={props.tokenData[tokenName.ginandjuice].link}
+                target="_blanck"
+              >
+                {props.tokenData[tokenName.ginandjuice].ticker}
               </a>
             </td>
-            <td>{props.gin.amount}</td>
+            <td>{props.balance[tokenName.ginandjuice].value}</td>
           </tr>
           <tr>
             <td>
@@ -88,11 +86,11 @@ const TknTable = (props: tokens) => {
               />
             </td>
             <td>
-              <a href={props.jolene.site} target="_blanck">
-                {props.jolene.ticker}
+              <a href={props.tokenData[tokenName.jolene].link} target="_blanck">
+                {props.tokenData[tokenName.jolene].ticker}
               </a>
             </td>
-            <td>{props.jolene.amount}</td>
+            <td>{props.balance[tokenName.jolene].value}</td>
           </tr>
           <tr>
             <td>
@@ -103,11 +101,11 @@ const TknTable = (props: tokens) => {
               />
             </td>
             <td>
-              <a href={props.sonnet.site} target="_blanck">
-                {props.sonnet.ticker}
+              <a href={props.tokenData[tokenName.sonnet].link} target="_blanck">
+                {props.tokenData[tokenName.sonnet].ticker}
               </a>
             </td>
-            <td>{props.sonnet.amount}</td>
+            <td>{props.balance[tokenName.sonnet].value}</td>
           </tr>
         </tbody>
       </Table>
