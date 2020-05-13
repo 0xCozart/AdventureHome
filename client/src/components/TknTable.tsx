@@ -6,7 +6,7 @@ import "../App.css";
 type tableData = {
   userAddress: string;
   tokenData: tokenDataObj;
-  balance: { [key: number]: { value: string } };
+  balance: { [key: number]: string };
 };
 
 const TknTable = (props: tableData) => {
@@ -39,7 +39,7 @@ const TknTable = (props: tableData) => {
                 {props.tokenData[tokenName.dunkonyou].ticker}
               </a>
             </td>
-            <td>{props.balance[tokenName.dunkonyou].value}</td>
+            <td>{props.balance[tokenName.dunkonyou]}</td>
           </tr>
           <tr>
             <td>
@@ -57,7 +57,7 @@ const TknTable = (props: tableData) => {
                 {props.tokenData[tokenName.fishclub].ticker}
               </a>
             </td>
-            <td>{props.balance[tokenName.fishclub].value}</td>
+            <td>{props.balance[tokenName.fishclub]}</td>
           </tr>
           <tr>
             <td>
@@ -75,7 +75,7 @@ const TknTable = (props: tableData) => {
                 {props.tokenData[tokenName.ginandjuice].ticker}
               </a>
             </td>
-            <td>{props.balance[tokenName.ginandjuice].value}</td>
+            <td>{props.balance[tokenName.ginandjuice]}</td>
           </tr>
           <tr>
             <td>
@@ -90,7 +90,7 @@ const TknTable = (props: tableData) => {
                 {props.tokenData[tokenName.jolene].ticker}
               </a>
             </td>
-            <td>{props.balance[tokenName.jolene].value}</td>
+            <td>{props.balance[tokenName.jolene]}</td>
           </tr>
           <tr>
             <td>
@@ -105,7 +105,7 @@ const TknTable = (props: tableData) => {
                 {props.tokenData[tokenName.sonnet].ticker}
               </a>
             </td>
-            <td>{props.balance[tokenName.sonnet].value}</td>
+            <td>{props.balance[tokenName.sonnet]}</td>
           </tr>
         </tbody>
       </Table>

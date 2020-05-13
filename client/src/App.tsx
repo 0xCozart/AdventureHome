@@ -15,7 +15,7 @@ function App() {
   const [userAccount, setUserAccount] = useState("");
   const [isConnected, setIsConnected] = useState(false);
   const [tokenBalance, setTokenBalance] = useState<{
-    [key: number]: { value: string };
+    [key: number]: string;
   }>({});
 
   const connectMetamask = async () => {
@@ -52,9 +52,7 @@ function App() {
       }
       setTokenBalance({
         ...tokenBalance,
-        [parseInt(token)]: {
-          value: amount,
-        },
+        [parseInt(token)]: amount,
       });
       console.log(tokenBalance);
     });
