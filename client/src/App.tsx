@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { tokenData } from "./data/tokenData";
 import { TknTable } from "./components/TknTable";
+import { balanceObj } from "./types/tokenStyles";
 import determineBalance from "./metamask/metamask";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { tokenDataObj, tokenName, balanceObj } from "./types/tokenStyles";
 
 declare let web3: any;
 declare let ethereum: any;
@@ -25,7 +25,6 @@ function App() {
         try {
           await ethereum.enable();
           web3.eth.getAccounts((err: string, accounts: string[]) => {
-            // console.log(accounts)
             if (err) console.log(err);
             else if (!accounts.length) alert("No Metamask accounts found");
             else {
@@ -42,13 +41,11 @@ function App() {
     }
   };
 
-  const mike = "0x48e8479b4906d45fbe702a18ac2454f800238b37";
-
   useEffect(() => {
     (async () => {
       let balances = await Promise.all(
         Object.entries(tokenData).map(async ([token, data]) => {
-          return await determineBalance(data.address, mike);
+          return await determineBalance(data.address, userAccount);
         })
       );
       for (let i = 0; i <= balances.length; i++) {
@@ -75,7 +72,7 @@ function App() {
           />
         </div>
         <TknTable
-          userAddress={mike}
+          userAddress={userAccount}
           tokenData={tokenData}
           balance={tokenBalance.tokens}
         />
