@@ -15,7 +15,7 @@ function App() {
   const [userAccount, setUserAccount] = useState("");
   const [isConnected, setIsConnected] = useState(false);
   const [tokenBalance, setTokenBalance] = useState<balanceObj>({
-    tokens: ["0", "0", "0", "0", "0"],
+    tokens: [],
   });
 
   const connectMetamask = async () => {
@@ -42,21 +42,27 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    let balances: string[] = [];
-    Object.entries(tokenData).forEach(async ([token, data]) => {
-      let amount: string = await determineBalance(data.address, userAccount);
-      if (!amount) {
-        amount = "0";
-        balances[parseInt(token)] = amount;
-      } else {
-        balances[parseInt(token)] = amount;
-      }
-    });
-    setTokenBalance((tokenBalance) => ({ ...tokenBalance, tokens: balances }));
-  }, [setIsConnected]);
+  const mike = "0x48e8479b4906d45fbe702a18ac2454f800238b37";
 
-  console.log(tokenBalance);
+  useEffect(() => {
+    (async () => {
+      let balances = await Promise.all(
+        Object.entries(tokenData).map(async ([token, data]) => {
+          return await determineBalance(data.address, mike);
+        })
+      );
+      for (let i = 0; i <= balances.length; i++) {
+        if (balances[i] == "") {
+          balances[i] = "0";
+        }
+      }
+      setTokenBalance((tokenBalance) => ({
+        ...tokenBalance,
+        tokens: balances,
+      }));
+    })();
+    console.log(tokenBalance);
+  }, [isConnected]);
 
   return (
     <div className="App">
@@ -69,7 +75,7 @@ function App() {
           />
         </div>
         <TknTable
-          userAddress={userAccount}
+          userAddress={mike}
           tokenData={tokenData}
           balance={tokenBalance.tokens}
         />
