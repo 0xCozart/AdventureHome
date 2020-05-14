@@ -49,7 +49,7 @@ function App() {
         })
       );
       for (let i = 0; i <= balances.length; i++) {
-        if (balances[i] == "") {
+        if (balances[i] === "") {
           balances[i] = "0";
         }
       }
