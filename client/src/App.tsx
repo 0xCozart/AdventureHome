@@ -18,6 +18,8 @@ function App() {
     tokens: [],
   });
 
+  (async () => await ethereum.enable())();
+
   const connectMetamask = async () => {
     try {
       if (ethereum) {
@@ -42,6 +44,10 @@ function App() {
   };
 
   useEffect(() => {
+    connectMetamask();
+  }, []);
+
+  useEffect(() => {
     (async () => {
       let balances = await Promise.all(
         Object.entries(tokenData).map(async ([token, data]) => {
@@ -49,7 +55,7 @@ function App() {
         })
       );
       for (let i = 0; i <= balances.length; i++) {
-        if (balances[i] == "") {
+        if (balances[i] === "") {
           balances[i] = "0";
         }
       }
@@ -59,7 +65,7 @@ function App() {
       }));
     })();
     console.log(tokenBalance);
-  }, [isConnected]);
+  }, [setIsConnected]);
 
   return (
     <div className="App">
