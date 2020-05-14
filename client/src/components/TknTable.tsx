@@ -1,12 +1,12 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
-import { tokenName, tokenDataObj } from "../types/tokenStyles";
+import { tokenName, tokenDataObj, balanceObj } from "../types/tokenStyles";
 import "../App.css";
 
 type tableData = {
   userAddress: string;
   tokenData: tokenDataObj;
-  balance: { [key: number]: string };
+  balance: string[];
 };
 
 const TknTable = (props: tableData) => {

@@ -12,6 +12,10 @@ export enum tokenName {
   sonnet,
 }
 
+export interface balanceObj {
+  [tokens: string]: string[];
+}
+
 export type tokenDataObj = {
   [key in tokenName]: data;
 };

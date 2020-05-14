@@ -5,7 +5,7 @@ import determineBalance from "./metamask/metamask";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { tokenDataObj, tokenName } from "./types/tokenStyles";
+import { tokenDataObj, tokenName, balanceObj } from "./types/tokenStyles";
 
 declare let web3: any;
 declare let ethereum: any;
@@ -14,9 +14,9 @@ declare let Web3: any;
 function App() {
   const [userAccount, setUserAccount] = useState("");
   const [isConnected, setIsConnected] = useState(false);
-  const [tokenBalance, setTokenBalance] = useState<{
-    [key: number]: string;
-  }>({});
+  const [tokenBalance, setTokenBalance] = useState<balanceObj>({
+    tokens: ["0", "0", "0", "0", "0"],
+  });
 
   const connectMetamask = async () => {
     try {
@@ -45,20 +45,21 @@ function App() {
   let mike: string = "0x48E8479b4906D45fBE702A18ac2454F800238b37";
 
   useEffect(() => {
+    let balances: string[] = [];
     Object.entries(tokenData).forEach(async ([token, data]) => {
       let amount: string = await determineBalance(data.address, mike);
       if (!amount) {
         amount = "0";
+        balances[parseInt(token)] = amount;
+      } else {
+        balances[parseInt(token)] = amount;
       }
-      setTokenBalance({
-        ...tokenBalance,
-        [parseInt(token)]: amount,
-      });
-      console.log(tokenBalance);
     });
-  }, [isConnected]);
+    setTokenBalance((tokenBalance) => ({ ...tokenBalance, tokens: balances }));
+  }, [setIsConnected]);
 
   console.log(tokenBalance);
+
   return (
     <div className="App">
       <div className="centered">
@@ -72,7 +73,7 @@ function App() {
         <TknTable
           userAddress={mike}
           tokenData={tokenData}
-          balance={tokenBalance!}
+          balance={tokenBalance.tokens}
         />
         <div>
           <Button variant="dark" onClick={connectMetamask}>
