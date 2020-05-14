@@ -65,7 +65,7 @@ function App() {
       }));
     })();
     console.log(tokenBalance);
-  }, [setIsConnected]);
+  }, [isConnected]);
 
   return (
     <div className="App">
@@ -83,9 +83,11 @@ function App() {
           balance={tokenBalance.tokens}
         />
         <div>
-          <Button variant="dark" onClick={connectMetamask}>
-            Connect Metamask
-          </Button>
+          {!isConnected && (
+            <Button variant="dark" onClick={connectMetamask}>
+              Connect Metamask
+            </Button>
+          )}
         </div>
       </div>
     </div>
