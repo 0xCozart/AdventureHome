@@ -42,12 +42,10 @@ function App() {
     }
   };
 
-  let mike: string = "0x48E8479b4906D45fBE702A18ac2454F800238b37";
-
   useEffect(() => {
     let balances: string[] = [];
     Object.entries(tokenData).forEach(async ([token, data]) => {
-      let amount: string = await determineBalance(data.address, mike);
+      let amount: string = await determineBalance(data.address, userAccount);
       if (!amount) {
         amount = "0";
         balances[parseInt(token)] = amount;
@@ -71,7 +69,7 @@ function App() {
           />
         </div>
         <TknTable
-          userAddress={mike}
+          userAddress={userAccount}
           tokenData={tokenData}
           balance={tokenBalance.tokens}
         />

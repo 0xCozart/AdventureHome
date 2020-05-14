@@ -2,8 +2,8 @@ var express = require("express");
 var port = process.env.port || 5000;
 var app = express();
 var path = require("path");
-app.listen(port, function () { return console.log("Listening on port " + port); });
+app.use(express.static(path.join(__dirname, "../client/build")));
 app.get("/", function (req, res) {
-    res.send(path.join(__dirname, "/client/build", "index.html"));
+    res.sendFile(path.join(__dirname, "../client/build", "index.html"));
 });
-app.listen(port);
+app.listen(port, function () { return console.log("Listening on port " + port); });
