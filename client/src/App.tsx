@@ -18,6 +18,8 @@ function App() {
     tokens: [],
   });
 
+  (async () => await ethereum.enable())();
+
   const connectMetamask = async () => {
     try {
       if (ethereum) {
@@ -42,6 +44,38 @@ function App() {
   };
 
   useEffect(() => {
+    try {
+      connectMetamask();
+    } catch (e) {
+      console.log("metamask on autoconnect:", e);
+    }
+  });
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       if (ethereum) {
+  //         web3 = new Web3(ethereum);
+  //         try {
+  //           await ethereum.enable();
+  //           web3.eth.getAccounts((err: string, accounts: string[]) => {
+  //             if (err) console.log(err);
+  //             else if (!accounts.length) alert("No Metamask accounts found");
+  //             else {
+  //               setUserAccount(accounts[0]);
+  //               setIsConnected(true);
+  //             }
+  //           });
+  //         } catch (e) {
+  //           console.error("Error, ", e);
+  //         }
+  //       }
+  //     } catch (e) {
+  //       console.log("error", e);
+  //     }
+  //   })();
+  // });
+
+  useEffect(() => {
     (async () => {
       let balances = await Promise.all(
         Object.entries(tokenData).map(async ([token, data]) => {
@@ -59,7 +93,7 @@ function App() {
       }));
     })();
     console.log(tokenBalance);
-  }, [isConnected]);
+  }, [setIsConnected]);
 
   return (
     <div className="App">
