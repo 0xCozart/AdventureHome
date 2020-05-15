@@ -7,11 +7,11 @@ type BalanceRequestProps = {
   onClickGetBalance: (account: string) => void;
 };
 
-const BalanceRequest = (props: BalanceRequestProps) => {
+export const BalanceRequest = (props: BalanceRequestProps) => {
   let [input, setInput] = useState<string>("");
 
   return (
-    <InputGroup className="mb-3" size="sm">
+    <InputGroup className="mb-3 query-bar" size="sm">
       <FormControl
         placeholder="Ethereum address..."
         aria-label="Ethereum address..."
@@ -27,5 +27,3 @@ const BalanceRequest = (props: BalanceRequestProps) => {
     </InputGroup>
   );
 };
-
-export default BalanceRequest;
