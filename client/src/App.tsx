@@ -47,6 +47,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    if (!isConnected || !userAccount) return;
     (async () => {
       let balances = await Promise.all(
         Object.entries(tokenData).map(async ([token, data]) => {
@@ -63,8 +64,7 @@ function App() {
         tokens: balances,
       }));
     })();
-    console.log(tokenBalance);
-  }, [isConnected]);
+  }, [isConnected, userAccount]);
 
   return (
     <div className="App">
@@ -76,11 +76,7 @@ function App() {
             alt="adventure logo"
           />
         </div>
-        <BalanceRequest
-          setuseraccount={setUserAccount}
-          connected={isConnected}
-          setisconnected={setIsConnected}
-        />
+        <BalanceRequest onClickGetBalance={setUserAccount} />
         <TknTable
           userAddress={userAccount}
           tokenData={tokenData}
