@@ -6,7 +6,8 @@
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "target": "es6"
+    "target": "es6",
+    "noImplicitAny": false
   },
   "exclude": ["**/node_modules", "server-build", "scripts"]
 }

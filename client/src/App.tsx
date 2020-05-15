@@ -3,6 +3,7 @@ import { tokenData } from "./data/tokenData";
 import { TknTable } from "./components/TknTable";
 import { balanceObj } from "./types/tokenStyles";
 import determineBalance from "./metamask/metamask";
+import BalanceRequest from "./components/BalanceRequest";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -17,8 +18,6 @@ function App() {
   const [tokenBalance, setTokenBalance] = useState<balanceObj>({
     tokens: [],
   });
-
-  (async () => await ethereum.enable())();
 
   const connectMetamask = async () => {
     try {
@@ -77,17 +76,20 @@ function App() {
             alt="adventure logo"
           />
         </div>
+        <BalanceRequest
+          setuseraccount={setUserAccount}
+          connected={isConnected}
+          setisconnected={setIsConnected}
+        />
         <TknTable
           userAddress={userAccount}
           tokenData={tokenData}
           balance={tokenBalance.tokens}
         />
         <div>
-          {!isConnected && (
-            <Button variant="dark" onClick={connectMetamask}>
-              Connect Metamask
-            </Button>
-          )}
+          <Button variant="dark" onClick={connectMetamask}>
+            Connect Metamask
+          </Button>
         </div>
       </div>
     </div>

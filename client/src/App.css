@@ -84,3 +84,7 @@ body {
   display: inline-block;
   opacity: 0.7;
 }
+
+.input-bar {
+  right: 0;
+}
