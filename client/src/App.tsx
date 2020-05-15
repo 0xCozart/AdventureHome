@@ -60,6 +60,7 @@ function App() {
           balances[i] = "0";
         }
       }
+      console.log(balances);
       setTokenBalance((tokenBalance) => ({
         ...tokenBalance,
         tokens: balances,

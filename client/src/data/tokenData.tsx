@@ -3,7 +3,7 @@ import { tokenDataObj, tokenName } from "../@types/tokenStyles";
 let tokenData: tokenDataObj = {
   [tokenName.dunkonyou]: {
     ticker: "DOY",
-    address: "0xe24ea27eb42eefdf6a129310a48b88e36fb3d8f5",
+    address: "0xeF7D4cf6686418c002947AD4953a3Eb325500f93",
     link: "http://13.56.180.100/",
   },
   [tokenName.fishclub]: {
@@ -29,3 +29,8 @@ let tokenData: tokenDataObj = {
 };
 
 export { tokenData };
+
+// 0xef7d4cf6686418c002947ad4953a3eb325500f93; // doy
+// 0x3BCA69e033B3605a714dd815F51Cb4e9D5B4693a // fish
+
+// 0x0FfA1C7234Ad4038B00614D8f8f84d30d08d36Ef // test address
