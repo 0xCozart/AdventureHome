@@ -90,7 +90,7 @@ function App() {
         </div>
       </div>
       <div className="explorer-bar">
-        <Explorer site={sites.ginandjuice} />
+        <Explorer site={sites.leaderboard} />
       </div>
     </div>
   );
