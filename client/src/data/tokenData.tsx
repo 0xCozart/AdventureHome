@@ -1,4 +1,4 @@
-import { tokenDataObj, tokenName } from "../types/tokenStyles";
+import { tokenDataObj, tokenName } from "../@types/tokenStyles";
 
 let tokenData: tokenDataObj = {
   [tokenName.dunkonyou]: {

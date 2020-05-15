@@ -3,17 +3,17 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 
-type explorerBar = {
+type queryBar = {
   setuseraccount: React.Dispatch<React.SetStateAction<string>>;
   setisconnected: React.Dispatch<React.SetStateAction<boolean>>;
   connected: boolean;
 };
 
-const BalanceRequest = (props: explorerBar) => {
+const QueryBar = (props: queryBar) => {
   let [input, setInput] = useState<string>("");
 
   return (
-    <InputGroup className="mb-3" size="sm">
+    <InputGroup className="mb-3 query-bar" size="sm">
       <FormControl
         placeholder="Ethereum address..."
         aria-label="Ethereum address..."
@@ -35,4 +35,4 @@ const BalanceRequest = (props: explorerBar) => {
   );
 };
 
-export default BalanceRequest;
+export default QueryBar;

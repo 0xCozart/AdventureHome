@@ -1,6 +1,6 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
-import { tokenName, tokenDataObj } from "../types/tokenStyles";
+import { tokenName, tokenDataObj } from "../@types/tokenStyles";
 import Button from "react-bootstrap/Button";
 import "../App.css";
 

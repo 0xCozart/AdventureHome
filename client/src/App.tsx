@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { tokenData } from "./data/tokenData";
 import { TknTable } from "./components/TknTable";
-import { balanceObj } from "./types/tokenStyles";
+import { balanceObj } from "./@types/tokenStyles";
+import { Explorer, sites } from "adventure-component-library";
 import determineBalance from "./metamask/metamask";
-import BalanceRequest from "./components/BalanceRequest";
+import QueryBar from "./components/QueryBar";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -76,7 +77,7 @@ function App() {
             alt="adventure logo"
           />
         </div>
-        <BalanceRequest
+        <QueryBar
           setuseraccount={setUserAccount}
           connected={isConnected}
           setisconnected={setIsConnected}
@@ -91,6 +92,9 @@ function App() {
             Connect Metamask
           </Button>
         </div>
+      </div>
+      <div className="explorer-bar">
+        <Explorer site={sites.ginandjuice} />
       </div>
     </div>
   );
