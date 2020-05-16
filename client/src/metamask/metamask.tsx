@@ -34,6 +34,7 @@ const determineBalance = (
         if (error) {
           console.log("something went wrong" + error);
         }
+        console.log(success);
         let output = success.toString();
         output = output.substring(0, output.length - 18);
         resolve(output);
