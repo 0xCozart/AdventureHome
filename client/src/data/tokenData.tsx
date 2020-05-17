@@ -29,8 +29,3 @@ let tokenData: tokenDataObj = {
 };
 
 export { tokenData };
-
-// 0xef7d4cf6686418c002947ad4953a3eb325500f93; // doy
-// 0x3BCA69e033B3605a714dd815F51Cb4e9D5B4693a // fish
-
-// 0x0FfA1C7234Ad4038B00614D8f8f84d30d08d36Ef // test address

@@ -88,9 +88,9 @@ function App() {
             Connect Metamask
           </Button>
         </div>
-      </div>
-      <div className="explorer-bar">
-        <Explorer site={sites.leaderboard} />
+        <div className="explorer-bar">
+          <Explorer site={sites.leaderboard} />
+        </div>
       </div>
     </div>
   );

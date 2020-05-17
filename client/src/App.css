@@ -90,8 +90,8 @@ body {
 }
 
 .explorer-bar {
-  position: absolute;
-  bottom: 10px;
+  position: relative;
+  top: 10px;
   transform: translate(-50%);
   left: 50%;
 }
