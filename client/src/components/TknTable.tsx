@@ -1,7 +1,6 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 import { tokenName, tokenDataObj } from "../@types/tokenStyles";
-import Button from "react-bootstrap/Button";
 import "../App.css";
 
 type tableData = {
@@ -35,7 +34,8 @@ const TknTable = (props: tableData) => {
             <td>
               <a
                 href={props.tokenData[tokenName.dunkonyou].link}
-                target="_blanck"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 {props.tokenData[tokenName.dunkonyou].ticker}
               </a>
@@ -53,7 +53,8 @@ const TknTable = (props: tableData) => {
             <td>
               <a
                 href={props.tokenData[tokenName.fishclub].link}
-                target="_blanck"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 {props.tokenData[tokenName.fishclub].ticker}
               </a>
@@ -71,7 +72,8 @@ const TknTable = (props: tableData) => {
             <td>
               <a
                 href={props.tokenData[tokenName.ginandjuice].link}
-                target="_blanck"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 {props.tokenData[tokenName.ginandjuice].ticker}
               </a>
@@ -87,7 +89,11 @@ const TknTable = (props: tableData) => {
               />
             </td>
             <td>
-              <a href={props.tokenData[tokenName.jolene].link} target="_blanck">
+              <a
+                href={props.tokenData[tokenName.jolene].link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {props.tokenData[tokenName.jolene].ticker}
               </a>
             </td>
@@ -102,7 +108,11 @@ const TknTable = (props: tableData) => {
               />
             </td>
             <td>
-              <a href={props.tokenData[tokenName.sonnet].link} target="_blanck">
+              <a
+                href={props.tokenData[tokenName.sonnet].link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {props.tokenData[tokenName.sonnet].ticker}
               </a>
             </td>

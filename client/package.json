@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/bignumber.js": "^5.0.0",
     "@types/jest": "^24.9.1",
     "@types/material-ui": "^0.21.7",
     "@types/node": "^12.12.38",
