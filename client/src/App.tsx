@@ -3,7 +3,7 @@ import { tokenData } from "./data/tokenData";
 import { TknTable } from "./components/TknTable";
 import { balanceObj } from "./@types/tokenStyles";
 import { Explorer, sites } from "adventure-component-library";
-import determineBalance from "./ethereum/determineBalance";
+import determineBalance from "./web3/balance";
 import { BalanceRequest } from "./components/QueryBar";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
