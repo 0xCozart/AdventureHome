@@ -1,10 +1,4 @@
-import BigNumber from "bignumber.js";
-
-BigNumber.config({ DECIMAL_PLACES: 18 });
-
 declare let web3: any;
-declare let ethereum: any;
-declare let Web3: any;
 
 let minABI = [
   // balanceOf
