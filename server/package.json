@@ -20,7 +20,7 @@
   "dependencies": {
     "@types/node": "^13.13.5",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.3"
   },
   "devDependencies": {
     "ts-node-dev": "^1.0.0-pre.44",
